@@ -1,31 +1,31 @@
 package com.epam.collections.queue;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class DishOrderDeterminer {
     public List<Integer> determineDishOrder(int numberOfDishes, int everyDishNumberToEat) {
 
-        Queue<Integer> q = new ArrayDeque<>();
-        List<Integer> d = new ArrayList<>();
+        Queue<Integer> queue = new LinkedList<>();
+        List<Integer> result = new ArrayList<>();
 
+        // Initialize the queue with dish numbers
         for (int i = 1; i <= numberOfDishes; i++) {
-            q.add(i);
+            queue.add(i);
         }
 
-        int count = 1;
-        while (!q.isEmpty()) {
-            int dishNumber = q.poll();
-            if (count % everyDishNumberToEat == 0) {
-                d.add(dishNumber);
-            } else {
-                q.add(dishNumber);
-            }
+        // Start eating dishes
+        int count = 0;
+        while (!queue.isEmpty()) {
+            int dish = queue.poll();
             count++;
+            if (count == everyDishNumberToEat) {
+                result.add(dish);
+                count = 0;
+            } else {
+                queue.add(dish);
+            }
         }
 
-        return d;
+        return result;
     }
 }

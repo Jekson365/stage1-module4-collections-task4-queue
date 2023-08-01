@@ -14,6 +14,7 @@ public class ArrayDequeCreator extends PriorityQueue<String> {
             arrayDeque.add(secondQueue.poll());
         }
 
+
         return arrayDeque;
     }
 }
